@@ -91,6 +91,7 @@ public class ParkingLotImpl implements ParkingLot {
 		String[] arr = parkCommand.split(EMPTY_STRING);
 		String regNumber = arr[1].trim();
 		
+		
 		String vehicleColor = arr[2].trim();
 		try {
 			if (!isParkingSpaceFull()) {

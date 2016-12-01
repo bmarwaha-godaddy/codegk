@@ -33,7 +33,6 @@ public class DriveClass {
 			String command = sc.nextLine();
 
 			if (command.contains(ParkingLot.CREATE_PARKING_LOT_COMMAND)) {
-
 				parkingLot.createParkingLot(command);
 			} else if (command.contains(ParkingLot.PARKING_COMMAND)) {
 				parkingLot.canparkVehicle(command);

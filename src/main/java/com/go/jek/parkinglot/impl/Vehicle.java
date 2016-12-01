@@ -13,6 +13,7 @@ public class Vehicle {
 	/**
 	 * 
 	 */
+	
 	private String registrationNumber;
 	private String color;
 	public Vehicle(String registrationNumber,String color) {

@@ -23,10 +23,8 @@ public interface ParkingLot {
 	String 	PARKING_LOT_CREATED_STATUS="Created a parking lot with";
 	
 	String WHITE_COLOR="white";
-	
 	String STATUS="status";
 	String PARKING_LOT_FULL="Sorry, parking lot is full";
-	
 	int createParkingLot(String command);
 	boolean isParkingSpaceFull() throws ParkingSpaceNotCreatedException;
 	boolean  canparkVehicle(String parkCommand);

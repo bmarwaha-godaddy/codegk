@@ -17,7 +17,6 @@ public class LaunchShell {
 	public LaunchShell() {
 		// TODO Auto-generated constructor stub
 	}
-
 	
 	public static String launchShell(String cmd) throws IOException{
 		

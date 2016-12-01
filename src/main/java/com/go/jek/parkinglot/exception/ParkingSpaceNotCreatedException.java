@@ -17,7 +17,7 @@ public class ParkingSpaceNotCreatedException extends Exception {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
+	/*
 	 * @param message
 	 */
 	public ParkingSpaceNotCreatedException(String message) {
