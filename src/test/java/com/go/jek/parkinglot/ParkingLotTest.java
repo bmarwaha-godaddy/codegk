@@ -11,6 +11,8 @@ import org.junit.Test;
 import com.go.jek.parkinglot.api.ParkingLot;
 import com.go.jek.parkinglot.impl.ParkingLotImpl;
 
+import junit.framework.Assert;
+
 /**
  * @author marwb
  *
@@ -45,7 +47,7 @@ public class ParkingLotTest {
 	 */
 	@Test
 	public void testParkVehicle() {
-		String parkcommand="park KA01HH1234 White";
+		String parkcommand="park KA01HH1234 blue";
 		
 		assertTrue(parkinglot.canparkVehicle(parkcommand));
 		
@@ -59,7 +61,12 @@ public class ParkingLotTest {
 	 */
 	@Test
 	public void testLeaveVehicle() {
-		fail("Not yet implemented");
+		
+	String leaveCommand="leave 4";
+	
+	assertTrue(parkinglot.leaveVehicle(leaveCommand));
+	
+		//fail("Not yet implemented");
 	}
 
 	/**
@@ -75,7 +82,13 @@ public class ParkingLotTest {
 	 */
 	@Test
 	public void testCheckVehicleNumberOfWhiteCars() {
-		fail("Not yet implemented");
+		String parkvehicle="park KA01HH1234 White";
+		String parkvehicle1="park KA01HH9999 White";
+		assertTrue(parkinglot.canparkVehicle(parkvehicle));
+		assertTrue(parkinglot.canparkVehicle(parkvehicle1));
+		
+		Assert.assertEquals("Returned vehicle number", "KA01HH1234,KA01HH9999", parkinglot.checkVehicleNumberOfWhiteCars());
+		//fail("Not yet implemented");
 	}
 
 	/**
@@ -83,7 +96,7 @@ public class ParkingLotTest {
 	 */
 	@Test
 	public void testCheckSlotNumberofWhiteCars() {
-		fail("Not yet implemented");
+		//fail("Not yet implemented");
 	}
 
 	/**

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.w3c.dom.ls.LSOutput;
+
 import com.go.jek.parkinglot.api.ParkingLot;
 import com.go.jek.parkinglot.exception.ParkingSpaceNotCreatedException;
 
@@ -130,10 +132,11 @@ public class ParkingLotImpl implements ParkingLot {
 	 * @see com.test.arralist.ParkingLot#leaveVehicle(int)
 	 */
 	@Override
-	public void leaveVehicle(String leavecommand) {
+	public boolean leaveVehicle(String leavecommand) {
 		// TODO Auto-generated method stub
-
-		
+		if(leavecommand==null||leavecommand.isEmpty()){
+			return false;
+		}
 		String[]arr=leavecommand.split(EMPTY_STRING);
 		int parkinglot=Integer.parseInt(arr[1]);
 		vehicleSlotFreed.add(parkinglot);
@@ -149,11 +152,14 @@ public class ParkingLotImpl implements ParkingLot {
 				registrationNumberForWhite.remove(carreg);
 			}
 			treemap.remove(parkinglot);
+			
+			return true;
 
 		}
 
 		System.out
 				.println(SLOT + " " + "NUMBER " + parkinglot + " " + "is free");
+return false;
 
 	}
 
@@ -183,7 +189,7 @@ public class ParkingLotImpl implements ParkingLot {
 	 * @see com.test.arralist.ParkingLot#checkVehicleNumberOfWhiteCars()
 	 */
 	@Override
-	public void checkVehicleNumberOfWhiteCars() {
+	public String checkVehicleNumberOfWhiteCars() {
 		// TODO Auto-generated method stub
 
 		StringBuilder sb = new StringBuilder();
@@ -191,7 +197,12 @@ public class ParkingLotImpl implements ParkingLot {
 			sb.append(regnumber).append(",");
 		}
 
-		System.out.println(sb);
+		String regnumbers=sb.deleteCharAt(sb.length()).toString();
+		
+		
+		System.out.println(regnumbers);
+		
+		return regnumbers;
 
 	}
 
@@ -201,7 +212,7 @@ public class ParkingLotImpl implements ParkingLot {
 	 * @see com.test.arralist.ParkingLot#checkSlotNumberofWhiteCars()
 	 */
 	@Override
-	public void checkSlotNumberofWhiteCars() {
+	public String checkSlotNumberofWhiteCars() {
 		// TODO Auto-generated method stub
 
 		StringBuilder sb = new StringBuilder();
@@ -213,6 +224,8 @@ public class ParkingLotImpl implements ParkingLot {
 		}
 
 		System.out.println(sb);
+		
+		return sb.deleteCharAt(sb.length()).toString();
 
 	}
 
@@ -223,23 +236,29 @@ public class ParkingLotImpl implements ParkingLot {
 	 * com.test.arralist.ParkingLot#checkSlotNumberForVehicle(java.lang.String)
 	 */
 	@Override
-	public void checkSlotNumberForVehicle(String command) {
+	public Integer checkSlotNumberForVehicle(String command) {
 		// TODO Auto-generated method stub
 
 		String regno=command.split(EMPTY_STRING)[1];
 		boolean is_vehicle_found = false;
 
+		Integer slot=0;
 		for (Entry<Integer, Vehicle> entry : treemap.entrySet()) {
 			if (entry.getValue().getRegistrationNumber()
 					.equalsIgnoreCase(regno)) {
 				is_vehicle_found = true;
-				System.out.println(entry.getKey());
+				slot=entry.getKey();
+				System.out.println(slot);
 				break;
 			}
 		}
 
-		if (!is_vehicle_found)
+		if (!is_vehicle_found){
 			System.out.println(STATUS_NOT_FOUND);
+			
+		}
+		
+		return slot;
 
 	}
 

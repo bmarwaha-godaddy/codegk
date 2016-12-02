@@ -19,12 +19,12 @@ public class DriveClass {
 		// TODO Auto-generated method stub
 
 		
-		try {
+		/*try {
 			LaunchShell.launchShell("cmd.exe");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		
 		Scanner sc = new Scanner(System.in);
 

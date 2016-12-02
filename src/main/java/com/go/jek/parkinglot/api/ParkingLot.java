@@ -28,12 +28,12 @@ public interface ParkingLot {
 	int createParkingLot(String command);
 	boolean isParkingSpaceFull() throws ParkingSpaceNotCreatedException;
 	boolean  canparkVehicle(String parkCommand);
-	void  leaveVehicle(String leaveCommand);
+	boolean  leaveVehicle(String leaveCommand);
 	void getStatus();
-	void checkVehicleNumberOfWhiteCars();
-	void checkSlotNumberofWhiteCars();
+	String checkVehicleNumberOfWhiteCars();
+	String checkSlotNumberofWhiteCars();
 	
-	void checkSlotNumberForVehicle(String regno);
+	Integer checkSlotNumberForVehicle(String regno);
 	
 
 }
