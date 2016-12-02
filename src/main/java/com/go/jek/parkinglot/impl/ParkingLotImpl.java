@@ -6,6 +6,10 @@ package com.go.jek.parkinglot.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
+
+import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
+
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -45,7 +49,7 @@ public class ParkingLotImpl implements ParkingLot {
 		
 		String []arr=createParkingLot.split(EMPTY_STRING);
 		this.sizeOfParkingLot = Integer.parseInt(arr[1]);
-		this.vehicleSlotFreed = new TreeSet<>();
+		
 
 		for (int j = 1; j <= sizeOfParkingLot; j++) {
 			vehicleSlotFreed.add(j);
@@ -228,6 +232,8 @@ return false;
 		return slotnumber;
 
 	}
+	
+
 
 	/*
 	 * (non-Javadoc)
@@ -236,7 +242,7 @@ return false;
 	 * com.test.arralist.ParkingLot#checkSlotNumberForVehicle(java.lang.String)
 	 */
 	@Override
-	public Integer checkSlotNumberForVehicle(String command) {
+	public int checkSlotNumberForVehicle(String command) {
 		// TODO Auto-generated method stub
 
 		String regno=command.split(EMPTY_STRING)[1];
@@ -260,6 +266,17 @@ return false;
 		
 		return slot;
 
+	}
+
+	/* (non-Javadoc)
+	 * @see com.go.jek.parkinglot.api.ParkingLot#getTotalVehiclesParked()
+	 */
+	@Override
+	public int getTotalVehiclesParked() {
+		// TODO Auto-generated method stub
+		
+		
+		return treemap.size();
 	}
 
 }

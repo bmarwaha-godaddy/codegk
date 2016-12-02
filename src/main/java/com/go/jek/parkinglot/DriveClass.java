@@ -31,7 +31,7 @@ public class DriveClass {
 		}*/
 		ParkingLot parkingLot = new ParkingLotImpl();
 		//BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-		BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(new File("D:/my_program file_inputs.txt"))));
+		BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(new File("D:/my_program_file_inputs.txt"))));
 		String command;
 		try {
 			while ((command = br.readLine()) != null) {
