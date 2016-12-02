@@ -6,14 +6,11 @@ package com.go.jek.parkinglot.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
-
-import org.w3c.dom.ls.LSOutput;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import com.go.jek.parkinglot.api.ParkingLot;
 import com.go.jek.parkinglot.exception.ParkingSpaceNotCreatedException;
-
-import java.util.TreeMap;
-import java.util.TreeSet;
 
 /**
  * @author marwb
@@ -33,7 +30,8 @@ public class ParkingLotImpl implements ParkingLot {
 	private List<Integer> slotNumberForWhiteCars = new ArrayList<>();
 	private List<String> registrationNumberForWhite = new ArrayList<>();
 	public ParkingLotImpl() {
-
+		this.vehicleSlotFreed = new TreeSet<>();
+		treemap = new TreeMap<>();
 	}
 
 	/*
@@ -52,7 +50,7 @@ public class ParkingLotImpl implements ParkingLot {
 		for (int j = 1; j <= sizeOfParkingLot; j++) {
 			vehicleSlotFreed.add(j);
 		}
-		treemap = new TreeMap<>();
+		//
 		StringBuilder sb = new StringBuilder(PARKING_LOT_CREATED_STATUS);
 		sb.append(EMPTY_STRING).append(sizeOfParkingLot).append(EMPTY_STRING)
 				.append(SLOT);
@@ -100,6 +98,7 @@ public class ParkingLotImpl implements ParkingLot {
 				Vehicle vehicle = new Vehicle(regNumber, vehicleColor);
 				int lotnumber = vehicleSlotFreed.pollFirst();
 				treemap.put(lotnumber, vehicle);
+			//	sizeOfParkingLot++;
 				if (vehicleColor.equalsIgnoreCase(WHITE_COLOR)) {
 					updateCarMetaDataForwhiteCars(lotnumber, regNumber);
 				}
@@ -197,7 +196,7 @@ return false;
 			sb.append(regnumber).append(",");
 		}
 
-		String regnumbers=sb.deleteCharAt(sb.length()).toString();
+		String regnumbers=sb.deleteCharAt(sb.length()-1).toString();
 		
 		
 		System.out.println(regnumbers);
@@ -219,13 +218,14 @@ return false;
 
 		for (Integer in : slotNumberForWhiteCars) {
 
-			sb.append(in).append(" ,");
+			sb.append(in).append(",");
 
 		}
 
+		String slotnumber=sb.deleteCharAt(sb.length()-1).toString();
 		System.out.println(sb);
 		
-		return sb.deleteCharAt(sb.length()).toString();
+		return slotnumber;
 
 	}
 
