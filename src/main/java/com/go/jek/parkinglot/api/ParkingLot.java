@@ -28,7 +28,7 @@ public interface ParkingLot {
 	int getTotalVehiclesParked();
 	int createParkingLot(String command);
 	boolean isParkingSpaceFull() throws ParkingSpaceNotCreatedException;
-	boolean  canparkVehicle(String parkCommand);
+	boolean  canParkVehicle(String parkCommand);
 	boolean  leaveVehicle(String leaveCommand);
 	void getStatus();
 	String checkVehicleNumberOfWhiteCars();

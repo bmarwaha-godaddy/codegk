@@ -6,10 +6,6 @@ package com.go.jek.parkinglot.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
-
-import org.junit.FixMethodOrder;
-import org.junit.runners.MethodSorters;
-
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -46,10 +42,9 @@ public class ParkingLotImpl implements ParkingLot {
 	@Override
 	public int createParkingLot(String createParkingLot) {
 		// TODO Auto-generated method stub
-		
-		String []arr=createParkingLot.split(EMPTY_STRING);
+
+		String[] arr = createParkingLot.split(EMPTY_STRING);
 		this.sizeOfParkingLot = Integer.parseInt(arr[1]);
-		
 
 		for (int j = 1; j <= sizeOfParkingLot; j++) {
 			vehicleSlotFreed.add(j);
@@ -59,9 +54,9 @@ public class ParkingLotImpl implements ParkingLot {
 		sb.append(EMPTY_STRING).append(sizeOfParkingLot).append(EMPTY_STRING)
 				.append(SLOT);
 
-	System.out.println(sb);
-	
-	return vehicleSlotFreed.size();
+		System.out.println(sb);
+
+		return vehicleSlotFreed.size();
 	}
 
 	/*
@@ -82,11 +77,12 @@ public class ParkingLotImpl implements ParkingLot {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 * Following method returns true of false depending on
+	 * if space is avaliable for vehicle parking
 	 * @see com.test.arralist.ParkingLot#parkVehicle(java.lang.String)
 	 */
 	@Override
-	public boolean canparkVehicle(String parkCommand) {
+	public boolean canParkVehicle(String parkCommand) {
 		// TODO Auto-generated method stub
 		if (parkCommand == null || parkCommand.isEmpty()) {
 			return false;
@@ -94,29 +90,28 @@ public class ParkingLotImpl implements ParkingLot {
 
 		String[] arr = parkCommand.split(EMPTY_STRING);
 		String regNumber = arr[1].trim();
-		
-		
+
 		String vehicleColor = arr[2].trim();
 		try {
 			if (!isParkingSpaceFull()) {
 				Vehicle vehicle = new Vehicle(regNumber, vehicleColor);
 				int lotnumber = vehicleSlotFreed.pollFirst();
 				treemap.put(lotnumber, vehicle);
-			//	sizeOfParkingLot++;
+				// sizeOfParkingLot++;
 				if (vehicleColor.equalsIgnoreCase(WHITE_COLOR)) {
 					updateCarMetaDataForwhiteCars(lotnumber, regNumber);
 				}
 
 				System.out.println(ALLOCATION_STATUS_OUTPUT + " " + lotnumber);
 
-			} else{
+			} else {
 				System.out.println(PARKING_LOT_FULL);
 				return false;
 			}
 		} catch (ParkingSpaceNotCreatedException e) {
 			// TODO Auto-generated catch block
 			System.out.println(e);
-			
+
 			return false;
 
 		}
@@ -137,11 +132,11 @@ public class ParkingLotImpl implements ParkingLot {
 	@Override
 	public boolean leaveVehicle(String leavecommand) {
 		// TODO Auto-generated method stub
-		if(leavecommand==null||leavecommand.isEmpty()){
+		if (leavecommand == null || leavecommand.isEmpty()) {
 			return false;
 		}
-		String[]arr=leavecommand.split(EMPTY_STRING);
-		int parkinglot=Integer.parseInt(arr[1]);
+		String[] arr = leavecommand.split(EMPTY_STRING);
+		int parkinglot = Integer.parseInt(arr[1]);
 		vehicleSlotFreed.add(parkinglot);
 		if (slotNumberForWhiteCars.contains(parkinglot)) {
 			slotNumberForWhiteCars.remove(parkinglot);
@@ -155,14 +150,14 @@ public class ParkingLotImpl implements ParkingLot {
 				registrationNumberForWhite.remove(carreg);
 			}
 			treemap.remove(parkinglot);
-			
+
+			System.out.println(SLOT + " " + "NUMBER " + parkinglot + " " + "is free");
 			return true;
 
 		}
 
-		System.out
-				.println(SLOT + " " + "NUMBER " + parkinglot + " " + "is free");
-return false;
+		
+		return false;
 
 	}
 
@@ -188,7 +183,8 @@ return false;
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 * Following method returns vehicle number of white cars separted 
+	 * by ,delimiter
 	 * @see com.test.arralist.ParkingLot#checkVehicleNumberOfWhiteCars()
 	 */
 	@Override
@@ -200,11 +196,10 @@ return false;
 			sb.append(regnumber).append(",");
 		}
 
-		String regnumbers=sb.deleteCharAt(sb.length()-1).toString();
-		
-		
+		String regnumbers = sb.deleteCharAt(sb.length() - 1).toString();
+
 		System.out.println(regnumbers);
-		
+
 		return regnumbers;
 
 	}
@@ -226,14 +221,12 @@ return false;
 
 		}
 
-		String slotnumber=sb.deleteCharAt(sb.length()-1).toString();
+		String slotnumber = sb.deleteCharAt(sb.length() - 1).toString();
 		System.out.println(sb);
-		
+
 		return slotnumber;
 
 	}
-	
-
 
 	/*
 	 * (non-Javadoc)
@@ -245,37 +238,38 @@ return false;
 	public int checkSlotNumberForVehicle(String command) {
 		// TODO Auto-generated method stub
 
-		String regno=command.split(EMPTY_STRING)[1];
+		String regno = command.split(EMPTY_STRING)[1];
 		boolean is_vehicle_found = false;
 
-		Integer slot=0;
+		Integer slot = 0;
 		for (Entry<Integer, Vehicle> entry : treemap.entrySet()) {
 			if (entry.getValue().getRegistrationNumber()
 					.equalsIgnoreCase(regno)) {
 				is_vehicle_found = true;
-				slot=entry.getKey();
+				slot = entry.getKey();
 				System.out.println(slot);
 				break;
 			}
 		}
 
-		if (!is_vehicle_found){
+		if (!is_vehicle_found) {
 			System.out.println(STATUS_NOT_FOUND);
-			
+
 		}
-		
+
 		return slot;
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.go.jek.parkinglot.api.ParkingLot#getTotalVehiclesParked()
 	 */
 	@Override
 	public int getTotalVehiclesParked() {
 		// TODO Auto-generated method stub
-		
-		
+
 		return treemap.size();
 	}
 

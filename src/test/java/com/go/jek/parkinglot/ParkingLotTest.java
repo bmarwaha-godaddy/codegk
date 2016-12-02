@@ -19,6 +19,8 @@ import junit.framework.Assert;
 /**
  * @author marwb
  *
+ *Order was imposed because junit does not run methods in order of 
+ *appearance in file
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
@@ -54,7 +56,7 @@ public class ParkingLotTest {
 	public void btestParkVehicle() {
 		String parkcommand="park KA01HH1234 blue";
 		
-		assertTrue(parkinglot.canparkVehicle(parkcommand));
+		assertTrue(parkinglot.canParkVehicle(parkcommand));
 		
 		//fail("Not yet implemented");
 	}
@@ -89,8 +91,8 @@ public class ParkingLotTest {
 	public void dtestCheckVehicleNumberOfWhiteCars() {
 		String parkvehicle="park KA01HH1234 White";
 		String parkvehicle1="park KA01HH9999 White";
-		assertTrue(parkinglot.canparkVehicle(parkvehicle));
-		assertTrue(parkinglot.canparkVehicle(parkvehicle1));
+		assertTrue(parkinglot.canParkVehicle(parkvehicle));
+		assertTrue(parkinglot.canParkVehicle(parkvehicle1));
 		
 		Assert.assertEquals("Returned vehicle number", "KA01HH1234,KA01HH9999", parkinglot.checkVehicleNumberOfWhiteCars());
 		//fail("Not yet implemented");
@@ -116,7 +118,7 @@ public class ParkingLotTest {
 	@Test
 	public void ftestCheckSlotNumberForVehicle() {
 		String command="park KA01HH3141 Black";
-		assertTrue(parkinglot.canparkVehicle(command));
+		assertTrue(parkinglot.canParkVehicle(command));
 		Assert.assertEquals(parkinglot.getTotalVehiclesParked(), parkinglot.checkSlotNumberForVehicle("status KA01HH3141"));
 		
 		

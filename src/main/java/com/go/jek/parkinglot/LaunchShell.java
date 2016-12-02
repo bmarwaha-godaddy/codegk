@@ -3,6 +3,7 @@
  */
 package com.go.jek.parkinglot;
 
+import java.io.Console;
 import java.io.IOException;
 
 /**
@@ -18,10 +19,18 @@ public class LaunchShell {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public static String launchShell(String cmd) throws IOException{
+	public static String launchShell() throws IOException{
 		
 		
-		Process proc = Runtime.getRuntime().exec(cmd);
+		Console c=System.console();
+		if (c == null) {
+            System.err.println("No console.");
+            System.exit(1);
+        }
+		String line=c.readLine();
+		System.out.println(line);
+		
+		/*Process proc = Runtime.getRuntime().exec(cmd);
         java.io.InputStream is = proc.getInputStream();
         java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
         String val = "";
@@ -30,8 +39,8 @@ public class LaunchShell {
         }
         else {
             val = "";
-        }
-        return val;
+        }*/
+        return null;
 		
 	}
 }
